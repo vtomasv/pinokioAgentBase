@@ -6,7 +6,7 @@ module.exports = {
 
   menu: async (kernel, info) => {
     // Detectar si ya esta instalado (carpeta env del venv)
-    const installed = await kernel.exists(__dirname, "env")
+    const installed = await kernel.exists(__dirname, "venv")
     // Detectar si el servidor esta corriendo
     const running = await kernel.script.running(__dirname, "start.json")
 

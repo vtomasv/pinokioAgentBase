@@ -4,25 +4,27 @@
     {
       "method": "log",
       "params": {
-        "html": "<div style='padding:16px'><h3>Iniciando Ollama...</h3></div>"
+        "html": "<div style='padding:20px; font-family:sans-serif'><h2 style='color:#6366f1'>Estructura de Marca Corporativa</h2><p>Iniciando servicios...</p></div>"
       }
     },
     {
       "method": "shell.run",
       "params": {
-        "message": "ollama serve > /dev/null 2>&1 &"
+        "message": "ollama serve &",
+        "path": "{{cwd}}"
       }
     },
     {
       "method": "shell.run",
       "params": {
-        "message": "sleep 2"
+        "message": "sleep 3",
+        "path": "{{cwd}}"
       }
     },
     {
       "method": "log",
       "params": {
-        "html": "<div style='padding:16px'><h3>Iniciando servidor de marca corporativa...</h3></div>"
+        "html": "<div style='padding:20px; font-family:sans-serif'><p style='color:#22c55e'>Ollama listo. Iniciando servidor web...</p></div>"
       }
     },
     {
@@ -30,6 +32,7 @@
       "params": {
         "venv": "venv",
         "message": "python server/app.py",
+        "path": "{{cwd}}",
         "env": {
           "PORT": "{{port}}",
           "DATA_DIR": "{{cwd}}/data",
