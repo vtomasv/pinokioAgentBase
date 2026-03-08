@@ -1,0 +1,41 @@
+{
+  "daemon": true,
+  "run": [
+    {
+      "method": "log",
+      "params": {
+        "html": "<div style='padding:16px'><h3>Iniciando Ollama...</h3></div>"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "message": "ollama serve > /dev/null 2>&1 &"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "message": "sleep 2"
+      }
+    },
+    {
+      "method": "log",
+      "params": {
+        "html": "<div style='padding:16px'><h3>Iniciando servidor de marca corporativa...</h3></div>"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "venv": "venv",
+        "message": "python server/app.py",
+        "env": {
+          "PORT": "{{port}}",
+          "DATA_DIR": "{{cwd}}/data",
+          "PLUGIN_DIR": "{{cwd}}"
+        }
+      }
+    }
+  ]
+}

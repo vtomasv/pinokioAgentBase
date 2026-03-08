@@ -1,0 +1,85 @@
+{
+  "run": [
+    {
+      "method": "log",
+      "params": {
+        "html": "<div style='padding:16px'><h3>Verificando Ollama...</h3></div>"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "message": "ollama --version || curl -fsSL https://ollama.com/install.sh | sh"
+      }
+    },
+    {
+      "method": "log",
+      "params": {
+        "html": "<div style='padding:16px'><h3>Descargando modelo llama3.1:8b...</h3><p style='color:#94a3b8'>Esto puede tomar varios minutos la primera vez.</p></div>"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "message": "ollama pull llama3.1:8b"
+      }
+    },
+    {
+      "method": "log",
+      "params": {
+        "html": "<div style='padding:16px'><h3>Configurando entorno Python...</h3></div>"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "message": "{{os.platform() === 'win32' ? 'python' : 'python3'}} -m venv venv"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "venv": "venv",
+        "message": "pip install --upgrade pip"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "venv": "venv",
+        "message": "pip install -r requirements.txt"
+      }
+    },
+    {
+      "method": "log",
+      "params": {
+        "html": "<div style='padding:16px'><h3>Inicializando datos...</h3></div>"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "message": "{{os.platform() === 'win32' ? 'mkdir data\\\\agents data\\\\sessions data\\\\exports data\\\\prompts' : 'mkdir -p data/agents data/sessions data/exports data/prompts'}}"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "message": "{{os.platform() === 'win32' ? 'copy defaults\\\\agents.json data\\\\agents\\\\agents.json' : 'cp defaults/agents.json data/agents/agents.json'}}"
+      }
+    },
+    {
+      "method": "shell.run",
+      "params": {
+        "message": "{{os.platform() === 'win32' ? 'xcopy /E /I /Y defaults\\\\prompts data\\\\prompts' : 'cp -r defaults/prompts/. data/prompts/'}}"
+      }
+    },
+    {
+      "method": "notify",
+      "params": {
+        "html": "<b>Instalacion completada!</b> Haz click en Iniciar para comenzar.",
+        "href": "start.json"
+      }
+    }
+  ]
+}
