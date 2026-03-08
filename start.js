@@ -5,7 +5,7 @@ module.exports = {
     {
       method: "shell.run",
       params: {
-        message: "curl -s http://localhost:11434/api/tags > /dev/null || ollama serve &",
+        message: "curl -s http://localhost:11434/api/tags > /dev/null 2>&1 || (ollama serve &)",
         background: true
       }
     },
@@ -15,8 +15,7 @@ module.exports = {
         message: "sleep 2"
       }
     },
-    
-    // Iniciar servidor backend
+    // Iniciar servidor backend con la UI
     {
       method: "shell.run",
       params: {
